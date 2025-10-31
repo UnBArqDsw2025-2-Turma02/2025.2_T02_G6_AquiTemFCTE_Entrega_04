@@ -1,0 +1,15 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "description": "Esse repositório é para ser utilizado pelos grupos como um template inicial. As seções do Template NÃO DEVEM SER OMITIDAS, sendo TODAS RELEVANTES. Demais diretrizes constam no Moodle.",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "docsify serve ."
+  },
+  "devDependencies": {
+    "docsify-cli": "^4.4.4"
+  }
+}
