@@ -1,0 +1,96 @@
+name: 📚 Proposta de Documentação
+description: Abra uma issue para propor, solicitar mudanças na documentação do projeto.
+title: "[DOCS]: <RESUMO DA SUA PROPOSTA>"
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por contribuir com a documentação do projeto! Por favor, preencha as informações abaixo.
+
+  - type: checkboxes
+    id: tipo_documentacao
+    attributes:
+      label: 📚 Tipo de Documentação
+      description: Selecione o tipo de documentação que você deseja propor
+      options:
+        - label: 📝 Correção de documentação existente
+        - label: ✨ Nova documentação
+        - label: 🔄 Atualização de documentação desatualizada
+        - label: 📖 Melhoria de tutorial existente
+        - label: 🎯 Novo tutorial ou guia
+
+  - type: textarea
+    id: descricao
+    attributes:
+      label: 📋 Descrição
+      description: Descreva claramente a documentação que você irá criar, corrigir ou atualizar. Explique o que é, o propósito e o que ela aborda.
+      placeholder: Descreva sua proposta de documentação...
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: localizacao
+    attributes:
+      label: 📍 Localização - Arquivo(s) afetado(s)
+      description: Selecione onde a documentação será adicionada ou modificada
+      options:
+        - label: README.md
+        - label: CONTRIBUTING.md
+        - label: Documentação de código (docstrings)
+        - label: Comentários no código
+        - label: Outro (especifique na descrição)
+
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: 🎯 Objetivo
+      description: Qual o objetivo principal desta documentação? Qual problema ela resolve ou qual necessidade ela atende?
+      placeholder: Descreva o objetivo da documentação...
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: publico_alvo
+    attributes:
+      label: 👥 Público-alvo
+      description: Quem é o público-alvo desta documentação?
+      options:
+        - label: Novos contribuidores
+        - label: Desenvolvedores experientes
+        - label: Usuários finais
+        - label: Mantenedores do projeto
+
+  - type: textarea
+    id: conteudo_proposto
+    attributes:
+      label: 📝 Conteúdo Proposto
+      description: Forneça um esboço ou um resumo do conteúdo que será adicionado. Use tópicos para organizar as ideias.
+      placeholder: |
+        Exemplo:
+        - Introdução ao conceito
+        - Exemplos práticos
+        - Configuração passo a passo
+        - Troubleshooting comum
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: criterios_aceitacao
+    attributes:
+      label: ✅ Critérios de Aceitação
+      description: Marque os critérios que serão atendidos
+      options:
+        - label: Documentação está clara e fácil de entender
+        - label: Exemplos práticos incluídos (quando aplicável)
+        - label: Linguagem consistente com o resto da documentação
+        - label: Links funcionais e atualizados
+        - label: Formatação adequada (Markdown)
+        - label: Revisão ortográfica e gramatical
+
+  - type: textarea
+    id: informacoes_adicionais
+    attributes:
+      label: 📚 Informações Adicionais
+      description: Adicione qualquer observação extra, contexto ou detalhes que possam ser úteis.
+      placeholder: Qualquer informação adicional relevante...
