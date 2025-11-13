@@ -58,3 +58,22 @@ poetry run alembic upgrade head
 A API estará disponível em `http://localhost:8000`
 
 A documentação da API estará disponível em `http://localhost:8000/docs`
+
+## Testando a aplicação
+
+### Interface de teste (HTML)
+
+Para testar o sistema de verificação de email e todas as funcionalidades implementadas:
+
+1. **No VS Code**, instale a extensão **Live Server**:
+   - Abra a aba de extensões (Ctrl+Shift+X)
+   - Pesquise por "Live Server"
+   - Instale a extensão do autor **Ritwick Dey**
+
+2. Abra o arquivo `test-register.html` na raiz do projeto
+
+3. Clique com o botão direito no arquivo e selecione **"Open with Live Server"**
+
+4. O navegador abrirá automaticamente com a interface de teste
+
+5. Siga o fluxo de teste
