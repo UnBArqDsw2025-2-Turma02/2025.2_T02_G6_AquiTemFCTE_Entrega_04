@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from api.common.errors.error_response import ErrorResponse
 from api.common.errors.exceptions import exc_incorrect_email_or_password
+from api.common.validators.general import check_matricula_is_equal_from_email
 from api.core.authentication import create_access_token, get_current_user
 from api.core.database import get_session
 from api.core.models import User
@@ -18,7 +19,6 @@ from api.modules.auth.repository import (
     insert_user,
 )
 from api.modules.auth.schemas import TokenJWT, UserPublic, UserRegister
-from api.common.validators.general import check_matricula_is_equal_from_email
 
 router = APIRouter(prefix='/auth', tags=['auth'])
 
@@ -36,7 +36,7 @@ CurrentUser = Annotated[User, Depends(get_current_user)]
 async def register_user(user: UserRegister, session: Session):
     if user.password != user.confirm_password:
         raise ErrorResponse(detail='The passwords must be the same')
-    
+
     if not check_matricula_is_equal_from_email(user.email, user.matricula):
         raise ErrorResponse(detail='Email and matricula do not match')
 

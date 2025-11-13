@@ -15,6 +15,7 @@ class User:
     email: Mapped[str] = mapped_column(unique=True)
     matricula: Mapped[str] = mapped_column(unique=True)
     password: Mapped[str]
+    profile_image: Mapped[str | None] = mapped_column(default=None)
     created_at: Mapped[datetime] = mapped_column(
         init=False, server_default=func.now()
     )

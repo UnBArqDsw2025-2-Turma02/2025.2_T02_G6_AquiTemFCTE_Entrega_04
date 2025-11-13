@@ -10,3 +10,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str
     ALGORITHM: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int
+    SUPABASE_URL: str
+    SUPABASE_SERVICE_KEY: str
+    SUPABASE_BUCKET: str
+    DEFAULT_PROFILE_PHOTO_URL: str
