@@ -14,3 +14,10 @@ class Settings(BaseSettings):
     SUPABASE_SERVICE_KEY: str
     SUPABASE_BUCKET: str
     DEFAULT_PROFILE_PHOTO_URL: str
+    REDIS_URL: str
+    SMTP_HOST: str
+    SMTP_PORT: int
+    SMTP_USER: str
+    SMTP_PASSWORD: str
+    SMTP_FROM_EMAIL: str
+    SMTP_FROM_NAME: str = 'AquiTemFCTE'

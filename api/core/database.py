@@ -1,3 +1,4 @@
+import redis.asyncio as redis
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 from supabase import AsyncClient, create_async_client
@@ -32,3 +33,6 @@ async def get_supabase() -> AsyncClient:
     if supabase is None:
         return await init_supabase()
     return supabase
+
+
+redis_client = redis.from_url(Settings().REDIS_URL, decode_responses=True)

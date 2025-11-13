@@ -1,14 +1,14 @@
 from datetime import datetime, timedelta
-from http import HTTPStatus
 from typing import Annotated
 from zoneinfo import ZoneInfo
 
-from fastapi import Depends, HTTPException
+from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 from jwt import DecodeError, decode, encode
 from jwt.exceptions import ExpiredSignatureError
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from api.common.errors.exceptions import credentials_exception
 from api.core.database import get_session
 from api.core.models import User
 from api.core.settings import Settings
@@ -19,11 +19,6 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl='auth/login/')
 Session = Annotated[AsyncSession, Depends(get_session)]
 T_OAuth2Scheme = Annotated[OAuth2PasswordBearer, Depends(oauth2_scheme)]
 
-credentials_exception = HTTPException(
-    status_code=HTTPStatus.UNAUTHORIZED,
-    detail='Could not validate credentials',
-    headers={'WWW-Authenticate': 'Bearer'},
-)
 
 settings = Settings()
 
