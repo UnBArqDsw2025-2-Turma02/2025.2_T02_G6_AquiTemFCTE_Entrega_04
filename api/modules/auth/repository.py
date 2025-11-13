@@ -3,15 +3,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from api.core.models import User
 from api.core.security import get_password_hash
-from api.modules.auth.schemas import UserRegister
 
 
 async def get_user_from_db(
-    user: UserRegister, session: AsyncSession
+    session: AsyncSession, user: User
 ) -> User | None:
     return await session.scalar(
         select(User).where(
-            (User.email == user.email) | (User.phone == user.phone)
+            (User.email == user.email) | (User.matricula == user.matricula)
         )
     )
 
@@ -22,11 +21,11 @@ async def get_user_from_db_by_email(
     return await session.scalar(select(User).where(User.email == email))
 
 
-async def insert_user(session: AsyncSession, user: UserRegister) -> User:
+async def insert_user(session: AsyncSession, user: User) -> User:
     new_user = User(
-        name=user.name,
+        fullname=user.fullname,
         email=user.email,
-        phone=user.phone,
+        matricula=user.matricula,
         password=get_password_hash(user.password),
     )
 

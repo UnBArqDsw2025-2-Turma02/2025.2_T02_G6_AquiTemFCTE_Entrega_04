@@ -1,19 +1,24 @@
-from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from pydantic import BaseModel, ConfigDict, Field
 
+from api.common.validators.email import UnbEmail
+from api.common.validators.fullname import FullName
+from api.common.validators.matricula import Matricula
 from api.common.validators.password import Password
 
 
 class UserRegister(BaseModel):
-    name: str
-    email: EmailStr
+    fullname: FullName
+    email: UnbEmail
+    matricula: Matricula
     password: Password
     confirm_password: Password
 
 
 class UserPublic(BaseModel):
     id: int
-    name: str
-    email: EmailStr
+    fullname: FullName
+    email: UnbEmail
+    matricula: Matricula
     model_config = ConfigDict(from_attributes=True)
 
 

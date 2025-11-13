@@ -11,9 +11,9 @@ class User:
     __tablename__ = 'users'
 
     id: Mapped[int] = mapped_column(init=False, primary_key=True)
-    name: Mapped[str]
+    fullname: Mapped[str]
     email: Mapped[str] = mapped_column(unique=True)
-    phone: Mapped[str] = mapped_column(unique=True)
+    matricula: Mapped[str] = mapped_column(unique=True)
     password: Mapped[str]
     created_at: Mapped[datetime] = mapped_column(
         init=False, server_default=func.now()

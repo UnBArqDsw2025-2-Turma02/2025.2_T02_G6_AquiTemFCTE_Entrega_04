@@ -18,6 +18,7 @@ from api.modules.auth.repository import (
     insert_user,
 )
 from api.modules.auth.schemas import TokenJWT, UserPublic, UserRegister
+from api.common.validators.general import check_matricula_is_equal_from_email
 
 router = APIRouter(prefix='/auth', tags=['auth'])
 
@@ -35,6 +36,9 @@ CurrentUser = Annotated[User, Depends(get_current_user)]
 async def register_user(user: UserRegister, session: Session):
     if user.password != user.confirm_password:
         raise ErrorResponse(detail='The passwords must be the same')
+    
+    if not check_matricula_is_equal_from_email(user.email, user.matricula):
+        raise ErrorResponse(detail='Email and matricula do not match')
 
     db_user = await get_user_from_db(session, user)
     if not db_user:
