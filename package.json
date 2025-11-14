@@ -22,6 +22,9 @@
     "packages/*"
   ],
   "dependencies": {
-    "docsify-cli": "^4.4.4"
+    "docsify-cli": "^4.4.4",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.9.6",
+    "styled-components": "^6.1.19"
   }
 }
