@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+    --fs-scale-up-07: 3.583rem;
+    --fs-scale-up-06: 2.986rem;
+    --fs-scale-up-05: 2.488rem;
+    --fs-scale-up-04: 2.074rem;
+    --fs-scale-up-03: 1.728rem;
+    --fs-scale-up-02: 1.44rem;
+    --fs-scale-up-01: 1.2rem;
+    --fs-scale-base: 1rem;
+    --fs-scale-down-01: 0.833rem;
+    --fs-scale-down-02: 0.694rem;
+    --fs-scale-down-03: 0.579rem;
+
+    --fw-thin: 100;
+    --fw-extra-light: 200;
+    --fw-light: 300;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-black: 900;
+
+    --font-lineheight-low: 115%;
+    --font-lineheight-medium: 145%;
+    --font-lineheight-high: 185%;
+}
+
+html {
+    /* font-size: 14px; */
+    color: var(--black);
+    /* font-size: var(--fs-scale-base); */
+    font-weight: var(--fw-regular);
+    line-height: var(--font-lineheight-low);
+}
+
+/* @media (max-width: 768px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 12px;
+    }
+} */
+
+h1 {
+    font-size: var(--fs-scale-up-07);
+    font-weight: var(--fw-bold);
+    line-height: var(--font-lineheight-low);
+}
+
+h2 {
+    font-size: var(--fs-scale-up-05);
+    font-weight: var(--fw-bold);
+    line-height: var(--font-lineheight-low);
+}
+
+h3 {
+    font-size: var(--fs-scale-up-04);
+    font-weight: var(--fw-semibold);
+    line-height: var(--font-lineheight-low)
+}
+
+h4 {
+    font-size: var(--fs-scale-up-03);
+    font-weight: var(--fw-semibold);
+    line-height: var(--font-lineheight-low)
+}
+
+h5 {
+    font-size: var(--fs-scale-up-02);
+    font-weight: var(--fw-regular);
+    line-height: var(--font-lineheight-medium);
+    line-height: var(--font-lineheight-low)
+}
+
+h6 {
+    font-size: var(--fs-scale-up-01);
+    font-weight: var(--fw-regular);
+    line-height: var(--font-lineheight-medium);
+    line-height: var(--font-lineheight-low)
+}
+
+label {
+    font-size: var(--fs-scale-base);
+    font-weight: var(--fw-semibold);
+    line-height: var(--font-lineheight-low)
+}
+
+small {
+    font-size: var(--fs-scale-down-01);
+    line-height: var(--font-lineheight-low)
+}
+
+strong {
+    font-weight: var(--fw-black);
+    line-height: var(--font-lineheight-low)
+}
+
+::placeholder{
+    font-size: var(--fs-scale-base);
+    font-weight: var(--fw-light);
+}
+
+
+

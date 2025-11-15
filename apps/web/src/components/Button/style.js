@@ -34,6 +34,7 @@ export const Container = styled.button`
   transition: 200ms;
   text-decoration: none;
   font-size: 0.8rem;
+  justify-content: center;
 
   ${({ variant }) => buttonVariants[variant] || buttonVariants.default}
 `;
