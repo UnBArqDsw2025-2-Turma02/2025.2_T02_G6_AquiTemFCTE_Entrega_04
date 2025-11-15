@@ -8,6 +8,15 @@ const buttonVariants = {
       background: var(--secondary-color-dark);
       color: var(--white);
     }
+  `,
+  outlineBlue: css`
+    background: transparent;
+    color: var(--primary-color);
+    border: 3px solid var(--primary-color);
+    &:hover {
+      background: var(--primary-color);
+      color: var(--white);
+    }
   `
 };
 
@@ -20,7 +29,7 @@ export const Container = styled.button`
   outline: none;
   border: none;
   font-family: var(--font-family);
-  font-weight: 400;
+  font-weight: bold;
   cursor: pointer;
   transition: 200ms;
   text-decoration: none;
