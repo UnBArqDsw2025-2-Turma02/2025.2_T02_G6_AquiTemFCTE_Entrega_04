@@ -4,6 +4,7 @@ export const Container = styled.header`
   width: 100%;
   display: flex;
   flex-direction: column;
+  position: fixed;
 `;
 
 export const Lettering = styled.div`

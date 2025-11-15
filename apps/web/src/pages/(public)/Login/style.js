@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-block: 80px;
+  margin-block: 90px;
 `;
 
 export const CardContainer = styled.div`
@@ -80,7 +80,7 @@ export const MicrosoftLoginButton = styled.div`
   align-items: center;
   justify-content: center;
   padding: 10px;
-  border: 3px solid #e07800;
+  border: 2px solid #e07800;
   border-radius: 100px;
   color: #e07800;
   font-size: 30px;

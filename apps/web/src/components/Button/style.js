@@ -12,7 +12,7 @@ const buttonVariants = {
   outlineBlue: css`
     background: transparent;
     color: var(--primary-color);
-    border: 3px solid var(--primary-color);
+    border: 2px solid var(--primary-color);
     &:hover {
       background: var(--primary-color);
       color: var(--white);

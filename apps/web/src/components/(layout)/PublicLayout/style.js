@@ -24,3 +24,7 @@ export const Layout = styled.div`
     width: 100%;
   }
 `;
+
+export const EspacamentoTopo = styled.div`
+  height: 106px;
+`;
