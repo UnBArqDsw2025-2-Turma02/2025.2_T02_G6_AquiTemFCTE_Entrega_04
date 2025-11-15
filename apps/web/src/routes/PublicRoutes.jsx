@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { ROUTES } from "../utils/constants";
 import PublicLayout from "../components/(layout)/PublicLayout";
-import LoginPage from "../pages/(private)/Login";
+import LoginPage from "../pages/(public)/Login";
 
 
 const PublicRoutes = () => {
