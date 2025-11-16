@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - Sistema de Verificação</title>
+</head>
+<body>
+    <h1>AquiTemFCTE - Teste de Verificação de Email</h1>
+    
+    <hr>
+    
+    <!-- SEÇÃO 1: REGISTRO -->
+    <h2>1. Registrar Usuário</h2>
+    <form id="registerForm">
+        <label>Matrícula (9 dígitos):</label>
+        <input type="text" id="matricula" maxlength="9" placeholder="240012345"><br><br>
+        
+        <label>Email (gerado automaticamente):</label>
+        <input type="text" id="email" readonly><br><br>
+        
+        <label>Nome Completo:</label>
+        <input type="text" id="fullname" placeholder="João Silva Santos"><br><br>
+        
+        <label>Senha:</label>
+        <input type="password" id="password" placeholder="SenhaForte123"><br><br>
+        
+        <label>Confirmar Senha:</label>
+        <input type="password" id="confirm_password"><br><br>
+        
+        <button type="submit">Registrar</button>
+    </form>
+    <div id="registerResult"></div>
+    
+    <hr>
+    
+    <!-- SEÇÃO 2: LOGIN -->
+    <h2>2. Login</h2>
+    <form id="loginForm">
+        <label>Email:</label>
+        <input type="text" id="loginEmail" placeholder="240012345@aluno.unb.br"><br><br>
+        
+        <label>Senha:</label>
+        <input type="password" id="loginPassword"><br><br>
+        
+        <button type="submit">Login</button>
+    </form>
+    <div id="loginResult"></div>
+    
+    <hr>
+    
+    <!-- SEÇÃO 3: INFO DO USUÁRIO -->
+    <h2>3. Informações do Usuário (GET /auth/me)</h2>
+    <button onclick="getUserInfo()">Buscar Minhas Informações</button>
+    <div id="userInfo"></div>
+    
+    <hr>
+    
+    <!-- SEÇÃO 4: ENVIAR CÓDIGO DE VERIFICAÇÃO -->
+    <h2>4. Enviar Código de Verificação</h2>
+    <button onclick="sendVerificationCode()">Enviar Código para Email</button>
+    <div id="sendCodeResult"></div>
+    
+    <hr>
+    
+    <!-- SEÇÃO 5: VERIFICAR CONTA -->
+    <h2>5. Verificar Conta</h2>
+    <form id="verifyForm">
+        <label>Código de Verificação (6 dígitos):</label>
+        <input type="text" id="verificationCode" maxlength="6" placeholder="123456"><br><br>
+        
+        <button type="submit">Verificar Conta</button>
+    </form>
+    <div id="verifyResult"></div>
+    
+    <hr>
+    
+    <!-- SEÇÃO 6: TESTAR ENDPOINT PROTEGIDO -->
+    <h2>6. Testar Endpoint Protegido (GET /auth/profile)</h2>
+    <p><em>Este endpoint só funciona para usuários verificados</em></p>
+    <button onclick="getProfile()">Acessar Perfil (Requer Verificação)</button>
+    <div id="profileResult"></div>
+    
+    <hr>
+    
+    <!-- SEÇÃO 7: LOGOUT -->
+    <h2>7. Logout</h2>
+    <button onclick="logout()">Limpar Token e Fazer Logout</button>
+
+    <script>
+        const API_URL = 'http://localhost:8000';
+        let token = localStorage.getItem('token') || '';
+
+        // Atualizar email automaticamente
+        document.getElementById('matricula').addEventListener('input', (e) => {
+            const matricula = e.target.value.trim();
+            if (matricula.length === 9 && /^\d{9}$/.test(matricula)) {
+                document.getElementById('email').value = `${matricula}@aluno.unb.br`;
+            } else {
+                document.getElementById('email').value = '';
+            }
+        });
+
+        // 1. REGISTRAR
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const data = {
+                fullname: document.getElementById('fullname').value,
+                email: document.getElementById('email').value,
+                matricula: document.getElementById('matricula').value,
+                password: document.getElementById('password').value,
+                confirm_password: document.getElementById('confirm_password').value
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                document.getElementById('registerResult').innerHTML = 
+                    `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+                
+                if (response.ok) {
+                    alert('✅ Usuário registrado! Agora faça login.');
+                }
+            } catch (error) {
+                document.getElementById('registerResult').innerHTML = 
+                    `<pre style="color: red;">Erro: ${error.message}</pre>`;
+            }
+        });
+
+        // 2. LOGIN
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new URLSearchParams();
+            formData.append('username', document.getElementById('loginEmail').value);
+            formData.append('password', document.getElementById('loginPassword').value);
+
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData
+                });
+
+                const result = await response.json();
+                document.getElementById('loginResult').innerHTML = 
+                    `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+                
+                if (response.ok) {
+                    token = result.access_token;
+                    localStorage.setItem('token', token);
+                    alert('✅ Login realizado! Token salvo.');
+                }
+            } catch (error) {
+                document.getElementById('loginResult').innerHTML = 
+                    `<pre style="color: red;">Erro: ${error.message}</pre>`;
+            }
+        });
+
+        // 3. GET USER INFO
+        async function getUserInfo() {
+            if (!token) {
+                alert('❌ Faça login primeiro!');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                const result = await response.json();
+                document.getElementById('userInfo').innerHTML = 
+                    `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+                
+                if (result.verified) {
+                    document.getElementById('userInfo').innerHTML += 
+                        '<p style="color: green;"><strong>✅ Usuário VERIFICADO</strong></p>';
+                } else {
+                    document.getElementById('userInfo').innerHTML += 
+                        '<p style="color: orange;"><strong>⚠️ Usuário NÃO VERIFICADO</strong></p>';
+                }
+            } catch (error) {
+                document.getElementById('userInfo').innerHTML = 
+                    `<pre style="color: red;">Erro: ${error.message}</pre>`;
+            }
+        }
+
+        // 4. ENVIAR CÓDIGO DE VERIFICAÇÃO
+        async function sendVerificationCode() {
+            if (!token) {
+                alert('❌ Faça login primeiro!');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/auth/send-verification-code`, {
+                    method: 'POST',
+                    headers: { 
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                });
+
+                const result = await response.json();
+                document.getElementById('sendCodeResult').innerHTML = 
+                    `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+                
+                if (response.ok) {
+                    alert('✅ Código enviado! Verifique seu email: ' + (result.email || 'seu email cadastrado'));
+                }
+            } catch (error) {
+                document.getElementById('sendCodeResult').innerHTML = 
+                    `<pre style="color: red;">Erro: ${error.message}</pre>`;
+            }
+        }
+
+        // 5. VERIFICAR CONTA
+        document.getElementById('verifyForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!token) {
+                alert('❌ Faça login primeiro!');
+                return;
+            }
+
+            const code = document.getElementById('verificationCode').value;
+
+            try {
+                const response = await fetch(`${API_URL}/auth/verify-account`, {
+                    method: 'POST',
+                    headers: { 
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ code })
+                });
+
+                const result = await response.json();
+                document.getElementById('verifyResult').innerHTML = 
+                    `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+                
+                if (response.ok) {
+                    alert('✅ Conta verificada com sucesso!');
+                }
+            } catch (error) {
+                document.getElementById('verifyResult').innerHTML = 
+                    `<pre style="color: red;">Erro: ${error.message}</pre>`;
+            }
+        });
+
+        // 6. TESTAR ENDPOINT PROTEGIDO
+        async function getProfile() {
+            if (!token) {
+                alert('❌ Faça login primeiro!');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/auth/profile`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                const result = await response.json();
+                document.getElementById('profileResult').innerHTML = 
+                    `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+                
+                if (response.ok) {
+                    document.getElementById('profileResult').innerHTML += 
+                        '<p style="color: green;"><strong>✅ Acesso permitido! Você está verificado.</strong></p>';
+                } else if (response.status === 403) {
+                    document.getElementById('profileResult').innerHTML += 
+                        '<p style="color: red;"><strong>❌ Acesso negado! Você precisa verificar sua conta primeiro.</strong></p>';
+                }
+            } catch (error) {
+                document.getElementById('profileResult').innerHTML = 
+                    `<pre style="color: red;">Erro: ${error.message}</pre>`;
+            }
+        }
+
+        // 7. LOGOUT
+        function logout() {
+            token = '';
+            localStorage.removeItem('token');
+            alert('✅ Logout realizado!');
+            location.reload();
+        }
+
+        // Mostrar token atual ao carregar
+        if (token) {
+            console.log('Token atual:', token);
+            alert('Token encontrado! Você está logado.');
+        }
+    </script>
+</body>
+</html>
