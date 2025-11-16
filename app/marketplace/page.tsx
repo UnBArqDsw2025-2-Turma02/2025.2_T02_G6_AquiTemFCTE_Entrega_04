@@ -38,10 +38,10 @@ export default function MarketplacePage() {
           id: product.id.toString(),
           title: product.title,
           price: parseFloat(product.price),
-          image: product.main_image || product.image_url,
+          image: product.main_image, // Usar main_image que tem fallback
           images: product.all_images || [],
-          category: product.category || 'Outros',
-          condition: product.condition || 'Não especificado'
+          category: product.campus || 'FCTE', // Usar campus como categoria
+          condition: product.status || 'Disponível'
         }))
         setProducts(formattedProducts)
         console.log('Produtos carregados:', formattedProducts)

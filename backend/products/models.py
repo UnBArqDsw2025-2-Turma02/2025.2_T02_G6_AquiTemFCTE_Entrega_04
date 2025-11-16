@@ -61,7 +61,10 @@ class Product(models.Model):
     
     def get_main_image(self):
         """Retorna URL da imagem principal ou placeholder"""
-        return self.image_url or "/placeholder-product.jpg"
+        if self.image_url:
+            return self.image_url
+        # Retornar URL de placeholder válida
+        return "https://via.placeholder.com/400x300/cccccc/666666?text=Sem+Imagem"
     
     def delete_all_images(self):
         """Remove todas as imagens do storage quando produto é deletado"""

@@ -9,7 +9,7 @@ class SupabaseStorageHelper:
     """Helper para gerenciar upload de imagens no Supabase Storage"""
     
     def __init__(self):
-        self.supabase_url = "http://localhost:54321"
+        self.supabase_url = "http://127.0.0.1:54321"
         self.storage_api = f"{self.supabase_url}/storage/v1"
         # Usar service_role key para operações de storage
         self.service_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU"
@@ -211,19 +211,33 @@ class SupabaseStorageHelper:
             dict: {"success": bool, "url": str, "error": str}
         """
         try:
-            # 1. Comprimir e redimensionar
-            processed_image = self.compress_and_resize_image(image_file)
+            print(f"=== STORAGE HELPER DEBUG ===")
+            print(f"Bucket: {bucket_name}, Folder: {folder}")
+            print(f"Image file: {image_file}, Size: {getattr(image_file, 'size', 'unknown')}")
             
-            # 2. Upload para Supabase
+            # 1. Verificar/criar bucket
+            bucket_result = self.create_bucket(bucket_name)
+            print(f"Bucket result: {bucket_result}")
+            
+            # 2. Comprimir e redimensionar
+            print("Processando imagem...")
+            processed_image = self.compress_and_resize_image(image_file)
+            print(f"Imagem processada: {processed_image.name}, size: {processed_image.size}")
+            
+            # 3. Upload para Supabase
+            print("Fazendo upload...")
             result = self.upload_to_supabase(processed_image, bucket_name, folder)
+            print(f"Upload result: {result}")
             
             return result
             
         except Exception as e:
+            error_msg = f"Erro no processamento: {str(e)}"
+            print(f"ERRO: {error_msg}")
             return {
                 "success": False,
                 "url": None,
-                "error": f"Erro no processamento: {str(e)}"
+                "error": error_msg
             }
 
 # Instância global para uso nos views
