@@ -1,171 +1,148 @@
-# AquiTemFCTE 🛍️- Node.js (versão 18 ou superior)
+# 2025.2 - AquiTemFCTE
 
-- Python 3.8+
+![Capa AquiTemFCTE](./docs/assets/AquiTemFCTE.png)
 
-Sistema de marketplace para estudantes da UnB - Campus FCTE- npm ou pnpm
+<div align="center">
 
+![GitHub repo size](https://img.shields.io/github/repo-size/UnBArqDsw2025-2-Turma02/2025.2_T02_G6_AquiTemFCTE_Entrega_04?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/UnBArqDsw2025-2-Turma02/2025.2_T02_G6_AquiTemFCTE_Entrega_04?style=for-the-badge)
+![GitHub views](https://komarev.com/ghpvc/?username=UnBArqDsw2025-2-Turma02&repo=2025.2_T02_G6_AquiTemFCTE_Entrega_04&color=blueviolet&style=for-the-badge&label=Views)
 
+</div>
 
-## 🚀 Como Rodar o Projeto### 1. Instalar dependências do Frontend (Next.js)
+## Sobre o Projeto
 
+O AquiTemFCTE é uma plataforma digital que busca atender às necessidades da comunidade universitária da Universidade de Brasília (UnB) do Campus Faculdade de Ciências e Tecnologias em Engenharia (FCTE). Nosso principal objetivo é facilitar a compra, venda e troca de itens novos e usados exclusivamente entre os estudantes da universidade, criando um ambiente seguro e confiável para transações.
 
+O projeto foi concebido no âmbito da disciplina de Arquitetura e Desenho de Software (UnB - 2025.2) e visa solucionar a dificuldade que muitos alunos têm em encontrar canais confiáveis para negociar produtos dentro do próprio campus. A plataforma centraliza essas atividades e otimiza a experiência do usuário, oferecendo recursos de pesquisa, categorização de produtos e perfis de usuário verificados.
 
-### Pré-requisitos```bash
+## ⚙️ Configurando o Ambiente:
 
-- Node.js 18+ # Na pasta raiz do projeto
-
-- Python 3.10+npm install
-
-- PostgreSQL (via Supabase Local)# ou
-
-pnpm install
-
-### 1. Configurar Backend (Django)```
-
-
-
-```bash### 2. Configurar Backend (Django)
-
-# Ativar ambiente virtual
-
-source .venv/bin/activate```bash
-
-# Entre na pasta backend
-
-# Instalar dependênciascd backend
-
-cd backend
-
-pip install -r requirements.txt# Ative o ambiente virtual
-
-source venv/bin/activate
-
-# Fazer migrações
-
-python manage.py migrate# Instale as dependências (se necessário)
-
-pip install -r requirements.txt
-
-# Rodar servidor Django```
-
-python manage.py runserver
-
-```### 3. Executar o projeto
-
-
-
-### 2. Configurar Frontend (Next.js)**Terminal 1 - Django Backend:**
+Para iniciar sua contribuição ao projeto, primeiro clone o repositório em sua máquina local com o comando abaixo:
 
 ```bash
-
-```bashcd backend
-
-# Instalar dependênciassource venv/bin/activate
-
-npm installpython manage.py runserver 127.0.0.1:8004
-
+git clone https://github.com/UnBArqDsw2025-2-Turma02/2025.2_T02_G6_AquiTemFCTE_Entrega_04.git
 ```
 
-# Rodar servidor Next.js
-
-npm run dev**Terminal 2 - Next.js Frontend:**
-
-``````bash
-
-# Na pasta raiz
-
-### 3. Configurar Banco de Dados (Supabase Local)npm run dev
-
-```
-
-```bash- **Frontend**: http://localhost:3000
-
-# Iniciar Supabase Local- **Backend API**: http://127.0.0.1:8004/api/
-
-supabase start
-
-*Projeto desenvolvido com Next.js 16.0.0 e Django 5.2.8*
-# Verificar status
-supabase status
-```
-
-## 🔗 URLs de Acesso
-
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://127.0.0.1:8000/api/
-- **Admin Django**: http://127.0.0.1:8000/admin/
-- **Supabase Studio**: http://127.0.0.1:54323
-
-## 📱 Funcionalidades
-
-- ✅ Cadastro e login de usuários
-- ✅ Marketplace de produtos
-- ✅ Upload de imagens (Supabase Storage)
-- ✅ Dashboard do usuário
-- ✅ Sistema de mensagens
-- ✅ Avaliações e ratings
-
-## 🛠️ Tecnologias Utilizadas
-
-### Frontend
-- **Next.js 16** - Framework React
-- **TypeScript** - Tipagem estática
-- **Tailwind CSS** - Estilização
-- **Shadcn/ui** - Componentes UI
-
-### Backend
-- **Django 5.2.8** - Framework web
-- **Django REST Framework** - API REST
-- **PostgreSQL** - Banco de dados (via Supabase)
-- **Pillow** - Processamento de imagens
-
-### Infraestrutura
-- **Supabase Local** - Banco de dados e storage
-- **Docker** - Containerização (Supabase)
-
-## 📦 Estrutura do Projeto
-
-```
-/
-├── app/                    # Páginas Next.js
-├── components/             # Componentes React
-├── hooks/                  # Custom hooks
-├── lib/                    # Utilitários e configurações
-├── public/                 # Arquivos estáticos
-├── backend/                # Django API
-│   ├── products/           # App de produtos
-│   ├── users/              # App de usuários
-│   └── chat/               # App de mensagens
-└── supabase/               # Configurações Supabase
-```
-
-## 🔧 Desenvolvimento
-
-### Comandos Úteis
+Após isso, instale as dependências de desenvolvimento com a utilização do `npm` com o comando abaixo:
 
 ```bash
-# Instalar nova dependência Frontend
-npm install <pacote>
-
-# Instalar nova dependência Backend
-pip install <pacote>
-pip freeze > backend/requirements.txt
-
-# Reset do banco de dados
-supabase db reset
-
-# Criar nova migração Django
-python manage.py makemigrations
-python manage.py migrate
+npm install
 ```
 
-### APIs Principais
+Pronto! Agora o seu ambiente está configurado para dar início às contribuições. Para executar a projeto localmente, siga os passos do próximo tópico.
 
-- `GET /api/products/` - Listar produtos
-- `POST /api/products/` - Criar produto
-- `POST /api/auth/register/` - Cadastro
-- `POST /api/auth/login/` - Login
+## 🚀 Executando o Projeto
 
-## 📄 Licença
+Este projeto utiliza uma estrutura monorepo com [Turborepo](https://turbo.build/). A documentação é gerada usando o [Docsify](https://docsify.js.org/), a interface é baseada em [ReactJs]() e o backend contruído com <EM BREVE>.
 
-Projeto acadêmico - UnB FCTE 2025
+Os comandos disponíveis para executar todo o ambiente pode ser visto abaixo:
+
+- **`npm run dev`**: Inicia o servidor de desenvolvimento da documentação, interface e backend.
+- **`npm run build`**: Realiza o build do ambiente da interface e backend.
+
+### Estrutura do Projeto
+
+```
+├── apps/
+│   └── docs/           # Documentação do projeto (Docsify)
+├── packages/           # Pacotes compartilhados
+│   ├── ui/            # Componentes de interface
+│   ├── eslint-config/ # Configurações do ESLint
+│   └── typescript-config/ # Configurações do TypeScript
+└── turbo.json         # Configuração do Turborepo
+```
+
+### Deploy Automático
+
+O projeto possui um workflow automatizado no GitHub Actions que:
+- Testa a build em Pull Requests
+- Faz deploy automático para GitHub Pages quando há merge na branch `main`
+- A documentação fica disponível em: `https://unbarqdsw2025-2-turma02.github.io/2025.2_T02_G6_AquiTemFCTE_Entrega_04/`
+
+## 🧪 Construído com:
+
+- [Turborepo](https://turbo.build/) - Utilizado para gerenciamento do monorepo
+- [Docsify](https://docsify.js.org/) - Utilizado para a documentação do projeto
+- [GitHub Actions](https://docs.github.com/en/actions) - Utilizado para CI/CD e deploy automático
+- [GitHub Pages](https://pages.github.com/) - Utilizado para hospedagem da documentação
+- [Contributor Covenant](https://www.contributor-covenant.org/) - Utilizado para o [Código de Conduta](./CODE_OF_CONDUCT.md)
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) - Utilizado como Padrão de Commits no [Guia de Contribuição](./CONTRIBUTING.md)
+- [GitHub Flow](https://docs.github.com/pt/get-started/using-github/github-flow) - Utilizado como Política de Branchs no [Guia de Contribuição](./CONTRIBUTING.md)
+
+## 📃 Contribuição:
+
+Leia o arquivo [CONTRIBUTING.md](./CONTRIBUTING.md) para mais detalhes e regras para o desenvolvimento, junto ao [Código de Conduta](./CODE_OF_CONDUCT.md) também disponível. Contribuições que fujam destas regras serão recusadas pelos mantenedores do projeto.
+
+## 👩‍💻 Mantenedores:
+
+<div align="center">
+  
+<table>
+  <tr>
+    <td align="center" width="120">
+      <a href="https://github.com/Algusto-RC">
+        <img src="https://github.com/Algusto-RC.png" width="80" style="border-radius: 50%;"/><br />
+        <sub><b>Algusto Rodrigues</b></sub>
+      </a>
+    </td>
+    <td align="center" width="120">
+      <a href="https://github.com/caiomsabino">
+        <img src="https://github.com/caiomsabino.png" width="80" style="border-radius: 50%;"/><br />
+        <sub><b>Caio Lucas</b></sub>
+      </a>
+    </td>
+    <td align="center" width="120">
+      <a href="https://github.com/DanielRogs">
+        <img src="https://github.com/DanielRogs.png" width="80" style="border-radius: 50%;"/><br />
+        <sub><b>Daniel Rodrigues</b></sub>
+      </a>
+    </td>
+    <td align="center" width="120">
+      <a href="https://github.com/Davicamilo23">
+        <img src="https://github.com/Davicamilo23.png" width="80" style="border-radius: 50%;"/><br />
+        <sub><b>Davi Camilo</b></sub>
+      </a>
+    </td>
+    <td align="center" width="120">
+      <a href="https://github.com/rabelzx">
+        <img src="https://github.com/rabelzx.png" width="80" style="border-radius: 50%;"/><br />
+        <sub><b>Eric Rabelo</b></sub>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="120">
+      <a href="https://github.com/felipeacampelo">
+        <img src="https://github.com/felipeacampelo.png" width="80" style="border-radius: 50%;"/><br />
+        <sub><b>Felipe de Aquino</b></sub>
+      </a>
+    </td>
+    <td align="center" width="120">
+      <a href="https://github.com/IgorJustino">
+        <img src="https://github.com/IgorJustino.png" width="80" style="border-radius: 50%;"/><br />
+        <sub><b>Igor Justino</b></sub>
+      </a>
+    </td>
+    <td align="center" width="120">
+      <a href="https://github.com/isaqzin">
+        <img src="https://github.com/isaqzin.png" width="80" style="border-radius: 50%;"/><br />
+        <sub><b>Isaque Camargos</b></sub>
+      </a>
+    </td>
+    <td align="center" width="120">
+      <a href="https://github.com/lcsgborges">
+        <img src="https://github.com/lcsgborges.png" width="80" style="border-radius: 50%;"/><br />
+        <sub><b>Lucas Guimarães</b></sub>
+      </a>
+    </td>
+    <td align="center" width="120">
+      <a href="https://github.com/ludmilaaysha">
+        <img src="https://github.com/ludmilaaysha.png" width="80" style="border-radius: 50%;"/><br />
+        <sub><b>Ludmila Aysha</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+</div>

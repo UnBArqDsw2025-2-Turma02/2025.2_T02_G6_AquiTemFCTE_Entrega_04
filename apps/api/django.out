@@ -1,0 +1,84 @@
+nohup: ignorando entrada
+Watching for file changes with StatReloader
+Not Found: /
+[16/Nov/2025 10:43:35] "GET / HTTP/1.1" 404 2470
+Bad Request: /api/auth/register/
+[16/Nov/2025 10:43:38] "POST /api/auth/register/ HTTP/1.1" 400 172
+Bad Request: /api/auth/register/
+[16/Nov/2025 10:43:39] "POST /api/auth/register/ HTTP/1.1" 400 172
+Bad Request: /api/auth/register/
+[16/Nov/2025 10:43:40] "POST /api/auth/register/ HTTP/1.1" 400 172
+Bad Request: /api/auth/register/
+[16/Nov/2025 10:43:41] "POST /api/auth/register/ HTTP/1.1" 400 172
+Bad Request: /api/auth/register/
+[16/Nov/2025 10:43:41] "POST /api/auth/register/ HTTP/1.1" 400 172
+Bad Request: /api/auth/register/
+[16/Nov/2025 10:43:42] "POST /api/auth/register/ HTTP/1.1" 400 172
+Bad Request: /api/auth/register/
+[16/Nov/2025 10:43:42] "POST /api/auth/register/ HTTP/1.1" 400 172
+Bad Request: /api/auth/register/
+[16/Nov/2025 10:43:43] "POST /api/auth/register/ HTTP/1.1" 400 172
+/home/igorjus/Downloads/code/apps/api/users/serializers.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 16, 2025 - 10:42:11
+Django version 5.2.8, using settings 'aquitemfcte.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+Watching for file changes with StatReloader
+[16/Nov/2025 10:49:24] "POST /api/auth/register/ HTTP/1.1" 201 132
+Bad Request: /api/auth/register/
+[16/Nov/2025 10:50:14] "POST /api/auth/register/ HTTP/1.1" 400 122
+/home/igorjus/Downloads/code/apps/api/users/serializers.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 16, 2025 - 10:48:44
+Django version 5.2.8, using settings 'aquitemfcte.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+Watching for file changes with StatReloader
+[16/Nov/2025 10:51:16] "POST /api/auth/register/ HTTP/1.1" 201 133
+[16/Nov/2025 10:52:31] "POST /api/auth/login/ HTTP/1.1" 200 230
+Bad Request: /api/auth/register/
+[16/Nov/2025 10:55:02] "POST /api/auth/register/ HTTP/1.1" 400 107
+[16/Nov/2025 11:00:20] "POST /api/auth/register/ HTTP/1.1" 201 127
+[16/Nov/2025 11:00:20] "POST /api/auth/login/ HTTP/1.1" 200 221
+[16/Nov/2025 11:00:22] "OPTIONS /api/products/?seller_id=5 HTTP/1.1" 200 0
+[16/Nov/2025 11:00:22] "GET /api/products/?seller_id=5 HTTP/1.1" 200 52
+[16/Nov/2025 11:01:02] "POST /api/products/ HTTP/1.1" 201 806
+[16/Nov/2025 11:01:04] "GET /api/products/?seller_id=5 HTTP/1.1" 200 707
+/home/igorjus/Downloads/code/apps/api/users/urls.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+November 16, 2025 - 10:50:52
+Django version 5.2.8, using settings 'aquitemfcte.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+=== DEBUG CREATE PRODUCT ===
+Headers: {'Content-Length': '198861', 'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryGW4jb7xVSiN8bEAT', 'Host': '127.0.0.1:8000', 'Connection': 'keep-alive', 'Sec-Ch-Ua-Platform': '"Linux"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'Sec-Ch-Ua': '"Google Chrome";v="141", "Not?A_Brand";v="8", "Chromium";v="141"', 'Sec-Ch-Ua-Mobile': '?0', 'Accept': '*/*', 'Origin': 'http://localhost:3001', 'Sec-Fetch-Site': 'cross-site', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://localhost:3001/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7'}
+Data: {'title': ['aaaaaaaaaaaaaa'], 'description': ['111'], 'price': ['10000'], 'campus': ['fcte'], 'status': ['disponivel'], 'seller_id': ['5'], 'image': [<InMemoryUploadedFile: 297.png (image/png)>]}
+Files: {'image': [<InMemoryUploadedFile: 297.png (image/png)>]}
+User authenticated: False
+User: AnonymousUser
+Seller escolhido: igorrr2 (ID: 5)
+=== STORAGE HELPER DEBUG ===
+Bucket: products, Folder: products/4
+Image file: 297.png, Size: 198079
+Bucket result: {'success': False, 'error': 'Erro ao criar bucket: 400 - {"statusCode":"409","error":"Duplicate","message":"The resource already exists"}'}
+Processando imagem...
+Imagem processada: 297.jpg, size: 39284
+Fazendo upload...
+Upload result: {'success': True, 'url': 'http://127.0.0.1:54321/storage/v1/object/public/products/products/4/1763301662_84e329f1_297.jpg', 'file_path': 'products/4/1763301662_84e329f1_297.jpg', 'error': None}
+Watching for file changes with StatReloader

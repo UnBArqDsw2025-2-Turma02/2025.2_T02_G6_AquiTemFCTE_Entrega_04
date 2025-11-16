@@ -1,0 +1,13 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'Ative o ambiente virtual e execute: python manage.py runserver'",
+    "migrate": "echo 'Ative o ambiente virtual e execute: python manage.py migrate'",
+    "makemigrations": "echo 'Ative o ambiente virtual e execute: python manage.py makemigrations'",
+    "setup-venv": "python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt",
+    "test": "echo 'Ative o ambiente virtual e execute: python manage.py test'"
+  },
+  "description": "Django REST API for AquiTemFCTE"
+}
