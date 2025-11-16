@@ -1,42 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import-normalize;
-
-:root{
-  --primary-color: #003A7A;
-  --primary-color-dark: #002855;
-  --secondary-color: #00822E;
-  --secondary-color-dark: #005A1F;
-  --tertiary-color: #ADAD98;
-  --tertiary-color-dark: #7A7A66;
-  --white: #EEEEEE;
-  --black: #000000;
-
-  --font-family: 'Alexandria', sans-serif;
-}
 
 *{
   box-sizing: border-box;
-  margin: 0;
-}
-
-main {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-
-  /*width: 100vw;  Alterado (verificar se não desconfigura a pagina */
-  min-height: 100vh;
-  /* display: block; */
-}
-
-
-div {
-  display: flex;
-  flex-direction: column;
 }
 
 body {
-  font-family: 'Myriad Pro', sans-serif;
   background: var(--white);
   margin: 0;
   padding: 0;

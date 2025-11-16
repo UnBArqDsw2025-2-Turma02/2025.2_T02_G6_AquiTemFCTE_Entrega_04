@@ -19,7 +19,6 @@ export const Lettering = styled.div`
 
   .chamada {
     font-size: 0.8rem;
-    font-family: var(--font-family);
     font-weight: 400;
   }
 

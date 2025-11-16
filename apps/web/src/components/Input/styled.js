@@ -46,7 +46,7 @@ export const InputFile = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  height: auto;
+  height: 180px;
   padding: 24px;
   justify-content: center;
   align-items: center;

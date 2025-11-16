@@ -3,13 +3,17 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-block: 48px;
-  margin-inline: 10%;
   gap: 32px;
+  margin-block: 48px;
     
     .title-signin {
         display: flex;
-        gap: 8px;
+        flex-direction: column;
+        gap: 0px;
+
+        h1 {
+            margin: 0;
+        }
     }
     
     .form-signin {
@@ -21,14 +25,18 @@ export const Container = styled.div`
         gap: 10%;
         flex-direction: row;
         flex-wrap: wrap;
-        gap-block: 40px;
     }
 
     .fields-form {
         flex: 1;
         display: flex;
+        flex-direction: column;
         gap: 16px;
         min-width: 240px;
         padding-bottom: 32px;
+    }
+
+    .redirect-login {
+        font-size: var(--fs-scale-down-01);
     }
 `;

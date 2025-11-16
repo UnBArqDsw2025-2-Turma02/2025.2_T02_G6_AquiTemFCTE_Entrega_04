@@ -1,12 +1,16 @@
 import { Container, CardContainer, MicrosoftLoginButton } from "./style";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
+import { useNavigate } from "react-router-dom";
 
 import { MdOutlineEmail, MdOutlineLock } from "react-icons/md";
 import { TbBrandOffice } from "react-icons/tb";
 
+import { ROUTES } from "../../../utils/constants";
+
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   
   return (
     <Container>
@@ -23,12 +27,12 @@ export default function LoginPage() {
         </div>
         <div className="register-side">
           <div className="description-area">
-            <h2>Não possui conta?</h2>
+            <h1>Não possui conta?</h1>
             <span>
               Inicie seus primeiros passos para começar a utilizar a plataforma
             </span>
           </div>
-          <Button variant="outlineBlue">Fazer Cadastro</Button>
+          <Button variant="outlineBlue" onClick={() => navigate(ROUTES.SIGNUP)}>Fazer Cadastro</Button>
         </div>
       </CardContainer>
     </Container>

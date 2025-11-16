@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
+    --font-family: 'Alexandria', sans-serif;
+    
     --fs-scale-up-07: 3.583rem;
     --fs-scale-up-06: 2.986rem;
     --fs-scale-up-05: 2.488rem;
-    --fs-scale-up-04: 2.074rem;
+    --fs-scale-up-04: 2rem;
     --fs-scale-up-03: 1.728rem;
     --fs-scale-up-02: 1.44rem;
     --fs-scale-up-01: 1.2rem;
@@ -28,66 +30,66 @@
 }
 
 html {
-    /* font-size: 14px; */
     color: var(--black);
-    /* font-size: var(--fs-scale-base); */
+    font-family: var(--font-family);
+    font-size: var(--fs-scale-base);
     font-weight: var(--fw-regular);
     line-height: var(--font-lineheight-low);
 }
 
-/* @media (max-width: 768px) {
-    html {
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 480px) {
-    html {
-        font-size: 12px;
-    }
-} */
-
 h1 {
-    font-size: var(--fs-scale-up-07);
+    font-size: var(--fs-scale-up-04);
+    margin: 0;
     font-weight: var(--fw-bold);
     line-height: var(--font-lineheight-low);
 }
 
 h2 {
-    font-size: var(--fs-scale-up-05);
+    font-size: var(--fs-scale-up-03);
+    margin: 0;
     font-weight: var(--fw-bold);
     line-height: var(--font-lineheight-low);
 }
 
 h3 {
-    font-size: var(--fs-scale-up-04);
+    font-size: var(--fs-scale-up-02);
+    margin: 0;
     font-weight: var(--fw-semibold);
     line-height: var(--font-lineheight-low)
 }
 
 h4 {
-    font-size: var(--fs-scale-up-03);
+    font-size: var(--fs-scale-up-01);
+    margin: 0;
     font-weight: var(--fw-semibold);
     line-height: var(--font-lineheight-low)
 }
 
 h5 {
-    font-size: var(--fs-scale-up-02);
+    font-size: var(--fs-scale-base);
+    margin: 0;
     font-weight: var(--fw-regular);
     line-height: var(--font-lineheight-medium);
     line-height: var(--font-lineheight-low)
 }
 
 h6 {
-    font-size: var(--fs-scale-up-01);
+    font-size: var(--fs-scale-down-01);
+    margin: 0;
     font-weight: var(--fw-regular);
     line-height: var(--font-lineheight-medium);
     line-height: var(--font-lineheight-low)
 }
 
 label {
-    font-size: var(--fs-scale-base);
+    font-size: var(--fs-scale-down-01);
     font-weight: var(--fw-semibold);
+    line-height: var(--font-lineheight-low)
+}
+
+span {
+    font-size: var(--fs-scale-base);
+    font-weight: var(--fw-regular);
     line-height: var(--font-lineheight-low)
 }
 
@@ -102,9 +104,6 @@ strong {
 }
 
 ::placeholder{
-    font-size: var(--fs-scale-base);
-    font-weight: var(--fw-light);
+    font-size: var(--fs-scale-down-01);
+    font-weight: var(--fw-light); 
 }
-
-
-

@@ -21,7 +21,6 @@ export const CardContainer = styled.div`
     justify-content: center;
     align-items: center;
     padding: 40px;
-    font-family: var(--font-family);
     height: 100%;
     gap: 10px;
 
@@ -46,17 +45,14 @@ export const CardContainer = styled.div`
     padding: 40px;
     text-align: center;
     color: var(--white);
-    font-family: var(--font-family);
     gap: 30px;
 
-    h2 {
-      font-weight: bold;
-      font-size: 2rem;
+    h1 {
       margin: 15px 0 0 0;
     }
 
     span {
-      font-size: 0.8rem;
+      font-size: var(--fs-scale-down-01);
     }
 
     .description-area {
