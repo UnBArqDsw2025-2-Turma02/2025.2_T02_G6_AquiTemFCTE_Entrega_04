@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código de Verificação - AquiTemFCTE</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #003d7a 0%, #01803e 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .logo {
+            max-width: 250px;
+            height: auto;
+        }
+        .header .aqui {
+            color: #003d7a;
+        }
+        .header .fcte {
+            color: #04c762;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .content h2 {
+            color: #003d7a;
+            margin-top: 0;
+            font-size: 22px;
+        }
+        .content p {
+            margin: 15px 0;
+            color: #555;
+        }
+        .content strong {
+            color: #003d7a;
+        }
+        .code-box {
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4f1e3 100%);
+            border: 3px dashed #00a651;
+            border-radius: 10px;
+            padding: 5px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 166, 81, 0.1);
+        }
+        .code {
+            font-size: 30px;
+            font-weight: bold;
+            letter-spacing: 10px;
+            color: #003d7a;
+            font-family: 'Courier New', monospace;
+            text-shadow: 1px 1px 2px rgba(0, 61, 122, 0.1);
+        }
+        .warning {
+            background: #fff9e6;
+            border-left: 4px solid #00a651;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .warning strong {
+            color: #003d7a;
+        }
+        .footer {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            text-align: center;
+            padding: 25px 20px;
+            color: #666;
+            font-size: 13px;
+            border-top: 3px solid #00a651;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        .footer strong {
+            color: #003d7a;
+        }
+        .subtitle {
+            color: #ffffff;
+            font-size: 14px;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://github.com/UnBArqDsw2025-2-Turma02/2025.2_T02_G6_AquiTemFCTE_Entrega_01/raw/main/assets/AquiTemFCTE.png" alt="AquiTemFCTE" class="logo">
+        </div>
+        
+        <div class="content">
+            <h2>Olá, estudante!</h2>
+            <p>Você está a um passo de completar seu cadastro na plataforma <strong>AquiTemFCTE</strong> da Universidade de Brasília.</p>
+            
+            <p>Para confirmar seu email institucional e finalizar o registro, utilize o código de verificação abaixo:</p>
+            
+            <div class="code-box">
+                <div class="code">{{CODE}}</div>
+            </div>
+            
+            <div class="warning">
+                <strong>Atenção:</strong> Este código expira em <strong>10 minutos</strong>.
+            </div>
+            
+            <p>Se você não solicitou este cadastro, por favor ignore este email.</p>
+        </div>
+        
+        <div class="footer">
+            <p><strong>AquiTemFCTE</strong></p>
+            <p style="color: #00a651; font-weight: 500;">Compre, Venda, Troque - Exclusivo UnB/FCTE</p>
+            <p>© 2025 Universidade de Brasília - Faculdade de Ciências e Tecnologias em Engenharia</p>
+            <p style="font-size: 11px; margin-top: 10px; color: #999;">Este é um email automático. Por favor, não responda.</p>
+        </div>
+    </div>
+</body>
+</html>
