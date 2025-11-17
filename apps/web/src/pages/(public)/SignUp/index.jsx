@@ -8,16 +8,22 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { register_user } from "../../../services/user.service.js";
+import Popup from "../../../components/PopUp/index.jsx";
+import { useNavigate } from "react-router-dom";
 
 import { base64Encode } from "@aquitemfcte/core";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [matricula, setMatricula] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [profileImage, setProfileImage] = useState("")
+  const [isPopupLoading, setIsPopupLoading] = useState(false);
+  const [isPopupSuccess, setIsPopupSuccess] = useState(false);
 
   const handleChangeProfileImage = async (e) => {
     const profileImageFile = e.target.files[0];
@@ -33,11 +39,19 @@ export default function SignUp() {
     }
   }
 
+  // FUNÇÃO QUE INTEGRA A INTERFACE COM O BACKEND
+  // PRIMEIRO VALIDA OS DADOS E DEPOIS CHAMA A FUNÇÃO QUE FAZ A REQUISIÇÃO: "register_user"
+  // DO ARQUIVO: "apps/web/src/services/user.service.js"
+  // A BIBLIOTECA "AXIOS" É USADA PARA FAZER A REQUISIÇÃO HTTP E
+  // O BACKEND RECEPTA OS DADOS ENVIADOS POR CONTA DA ENDPOINT "auth/register"
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!name || !email || !matricula || !senha || !confirmarSenha) {
       toast.error("Por favor, preencha todos os campos obrigatórios.");
+      return;
+    } else if (name.split(" ").some((part) => part.length < 2)) {
+      toast.error("Cada parte do nome deve ter pelo menos 2 caracteres.");
       return;
     } else if (matricula.length !== 9) {
       toast.error("A matrícula deve ter 9 dígitos.");
@@ -59,6 +73,7 @@ export default function SignUp() {
       return;
     }
     try {
+      setIsPopupLoading(true);
       await register_user({
         name,
         email,
@@ -67,8 +82,15 @@ export default function SignUp() {
         confirmarSenha,
         profileImage,
       });
-      toast.success("Usuário cadastrado com sucesso!");
+      setIsPopupLoading(false);
+      setProfileImage("");
+      setIsPopupSuccess(true);
+      setTimeout(() => {
+        setIsPopupSuccess(false);
+        navigate(ROUTES.LOGIN);
+      }, 4000);
     } catch (error) {
+      setIsPopupLoading(false);
       if (error.response.data.detail === "User already exists") {
         toast.error("Este usuário já existe");
         return;
@@ -80,6 +102,24 @@ export default function SignUp() {
 
     return (
       <Container>
+        <Popup
+          isOpen={isPopupLoading}
+          onClose={() => setIsPopupLoading(false)}
+          disabled
+        >
+          <p>Aguarde...</p>
+        </Popup>
+        <Popup
+          isOpen={isPopupSuccess}
+          onClose={() => setIsPopupSuccess(false)}
+          disabled
+        >
+          <h1>Cadastro feito com sucesso!</h1>
+          <p>
+            Realize o login para continuar com a configuração de sua conta! <br /><br/>
+            Redirecionando para a página de login...
+          </p>
+        </Popup>
         <ToastContainer />
         <div className="title-signin">
           <h1>Cadastre-se</h1>
@@ -104,7 +144,10 @@ export default function SignUp() {
                 placeholder="Matrícula"
                 icon
                 iconChildren={<RiFingerprintFill />}
-                onChange={(e) => { setMatricula(e.target.value); setEmail(e.target.value + "@aluno.unb.br"); }}
+                onChange={(e) => {
+                  setMatricula(e.target.value);
+                  setEmail(e.target.value + "@aluno.unb.br");
+                }}
                 type="number"
                 required
               />
@@ -147,7 +190,9 @@ export default function SignUp() {
               />
             </div>
           </div>
-          <Button type="submit" onClick={handleSubmit}>Finalizar Cadastro</Button>
+          <Button type="submit" onClick={handleSubmit}>
+            Finalizar Cadastro
+          </Button>
           <span className="redirect-login">
             Não possui conta? <a href={ROUTES.LOGIN}>Faça login</a>
           </span>
