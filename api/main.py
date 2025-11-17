@@ -23,7 +23,12 @@ app = FastAPI(title='API AquiTemFCTE', lifespan=lifespan)
 # rodando o front (:5500 era a porta q eu tav usando pra teste)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['http://127.0.0.1:5500', 'http://localhost:5500'],
+    allow_origins=[
+        'http://127.0.0.1:5500', 
+        'http://localhost:5500',
+        'http://127.0.0.1:5173', 
+        'http://localhost:5173',
+    ],
     allow_credentials=True,
     allow_methods=['*'],
     allow_headers=['*'],

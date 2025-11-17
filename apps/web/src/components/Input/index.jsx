@@ -14,6 +14,8 @@ export default function Input({
   required = false,
   accept,
   multiple,
+  disabled = false,
+  value,
 }) {
   const [showPassword, setShowPassword] = useState(false);
   const [inputType, setInputType] = useState(type);
@@ -68,6 +70,8 @@ export default function Input({
                 placeholder={placeholder}
                 onChange={onChange}
                 required={required}
+                disabled={disabled}
+                value={value}
               />
 
               {type === "password" && (
