@@ -42,25 +42,41 @@ export default function UserProfilePage({ params }: { params: { username: string
         const response = await fetch(`${API_BASE}/products/`)
         const data = await response.json()
         
-        console.log('Produtos carregados:', data.results.length)
+        console.log('=== DEBUG PERFIL ===')
+        console.log('Total de produtos carregados:', data.results.length)
         
-        // Pegar dados do usuário logado do localStorage
-        const userData = localStorage.getItem('user')
-        if (userData) {
-          const user = JSON.parse(userData)
+        // Pegar dados do usuário logado do localStorage (igual ao dashboard)
+        const localUser = localStorage.getItem('user')
+        if (localUser) {
+          const user = JSON.parse(localUser)
           console.log('Usuário logado:', user)
+          console.log('Username do usuário:', user.username)
+          console.log('Email do usuário:', user.email)
           
-          // Filtrar produtos do usuário atual - verificar tanto username quanto email
-          const myProducts = data.results.filter((product: Product) => 
-            product.seller_username === user.username || 
-            product.seller_username === user.email ||
-            product.seller_username.includes(user.username)
-          )
+          // Debug: mostrar todos os sellers
+          console.log('Sellers dos produtos:', data.results.map((p: any) => p.seller_username))
+          
+          // Filtrar produtos do usuário atual - versão mais robusta
+          const myProducts = data.results.filter((product: Product) => {
+            const seller = product.seller_username?.toLowerCase() || ''
+            const userName = user.username?.toLowerCase() || ''
+            const userEmail = user.email?.toLowerCase() || ''
+            
+            console.log(`Comparando: seller="${seller}" com username="${userName}" e email="${userEmail}"`)
+            
+            return seller === userName || 
+                   seller === userEmail ||
+                   seller.includes(userName) ||
+                   seller.includes(userEmail.split('@')[0])
+          })
           
           console.log('Meus produtos encontrados:', myProducts.length)
           console.log('Produtos:', myProducts)
+          console.log('===================')
           
           setUserProducts(myProducts)
+        } else {
+          console.log('ERRO: Usuário não encontrado no localStorage!')
         }
       } catch (error) {
         console.error('Erro ao carregar produtos do usuário:', error)

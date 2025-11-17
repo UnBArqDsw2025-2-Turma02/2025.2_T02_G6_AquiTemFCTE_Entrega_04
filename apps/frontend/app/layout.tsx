@@ -1,10 +1,17 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
+import { Alexandria } from "next/font/google"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { AuthProvider } from "@/hooks/use-auth"
 import "./globals.css"
+
+const alexandria = Alexandria({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-alexandria",
+})
 
 export const metadata: Metadata = {
   title: "AquiTemFCTE - Marketplace da Comunidade",
@@ -19,10 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`font-sans antialiased min-h-screen flex flex-col`}>
+      <body className={`${alexandria.variable} font-sans antialiased min-h-screen flex flex-col`}>
         <AuthProvider>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 pt-[104px] md:pt-[88px]">{children}</main>
           <Footer />
         </AuthProvider>
         <Analytics />

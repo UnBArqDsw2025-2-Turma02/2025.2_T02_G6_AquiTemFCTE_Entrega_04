@@ -1,6 +1,6 @@
 "use client"
 
-import { Package, ShoppingBag, Heart, MessageCircle, Plus, TrendingUp } from "lucide-react"
+import { Package, ShoppingBag, Heart, MessageCircle, Plus, TrendingUp, LogOut } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -123,6 +123,13 @@ function DashboardContent({
   stats: any
   loading: boolean
 }) {
+  const { logout } = useAuth()
+
+  const handleLogout = () => {
+    logout()
+    window.location.href = "/"
+  }
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -148,12 +155,22 @@ function DashboardContent({
                 <p className="text-primary-foreground/80">Bem-vindo ao seu dashboard</p>
               </div>
             </div>
-            <Button asChild className="bg-secondary hover:bg-secondary/90 text-secondary-foreground">
-              <Link href="/dashboard/novo-produto">
-                <Plus className="h-5 w-5 mr-2" />
-                Novo Produto
-              </Link>
-            </Button>
+            <div className="flex gap-2">
+              <Button asChild className="bg-secondary hover:bg-secondary/90 text-secondary-foreground">
+                <Link href="/dashboard/novo-produto">
+                  <Plus className="h-5 w-5 mr-2" />
+                  Novo Produto
+                </Link>
+              </Button>
+              <Button 
+                onClick={handleLogout}
+                variant="outline" 
+                className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              >
+                <LogOut className="h-5 w-5 mr-2" />
+                Sair
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -329,7 +346,9 @@ function DashboardContent({
                     <label className="text-sm font-medium">Campus</label>
                     <p className="text-muted-foreground">{profile?.campus || 'Não informado'}</p>
                   </div>
-                  <Button variant="outline">Editar Perfil</Button>
+                  <Button asChild variant="outline">
+                    <Link href="/dashboard/editar-perfil">Editar Perfil</Link>
+                  </Button>
                 </CardContent>
               </Card>
             </TabsContent>
