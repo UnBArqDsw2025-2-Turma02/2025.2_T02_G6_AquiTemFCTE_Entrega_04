@@ -19,16 +19,13 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title='API AquiTemFCTE', lifespan=lifespan)
 
-# pessoal do front, alterar aqui depois pra url e porta q vcs estiverem
-# rodando o front (:5500 era a porta q eu tav usando pra teste)
+# Configuração do CORS - permite requisições apenas do frontend
 app.add_middleware(
     CORSMiddleware,
-    # during development allow the common local dev origins; use '*' to avoid CORS issues
-    # in dev environments. For production, restrict origins appropriately.
     allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=['*'],
-    allow_headers=['*'],
+    allow_credentials=True,         # Permite cookies/autenticação
+    allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allow_headers=["*"],           # Permite todos os cabeçalhos
 )
 
 app.include_router(auth_router)

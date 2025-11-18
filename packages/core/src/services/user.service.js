@@ -1,5 +1,8 @@
 import axios from "axios";
-import { MODE, API_MAIN_ENDPOINT } from "../utils/constants.js";
+import {
+  MODE,
+  API_MAIN_ENDPOINT,
+} from "../../../../apps/web/src/utils/constants.js";
 
 const baseURL = MODE.DEV + API_MAIN_ENDPOINT.AUTH;
 // MODE.DEV É "http://localhost:8000/" (URL DO BACKEND EM AMBIENTE DE DESENVOLVIMENTO
@@ -30,18 +33,18 @@ export async function register_user(userData) {
 export async function login_user(email, password) {
   try {
     const params = new URLSearchParams();
-    params.append('username', email);
-    params.append('password', password);
+    params.append("username", email);
+    params.append("password", password);
 
     const response = await axios.post(`${baseURL}/login`, params, {
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        "Content-Type": "application/x-www-form-urlencoded",
       },
     });
 
     return response.data;
   } catch (error) {
-    console.error('Erro ao realizar login:', error);
+    console.error("Erro ao realizar login:", error);
     throw error;
   }
 }

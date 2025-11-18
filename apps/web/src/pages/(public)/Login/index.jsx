@@ -11,9 +11,8 @@ import { MdOutlineEmail, MdOutlineLock } from "react-icons/md";
 import { TbBrandOffice } from "react-icons/tb";
 
 import { ROUTES, MODE, API_MAIN_ENDPOINT } from "../../../utils/constants";
-import { login_user } from "../../../services/user.service.js";
-
-
+import { login_user } from "@aquitemfcte/core";
+  
 export default function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -22,7 +21,7 @@ export default function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-      toast.error('Preencha email e senha');
+      toast.error("Preencha email e senha");
       return;
     }
 
@@ -30,7 +29,7 @@ export default function LoginPage() {
       const data = await login_user(email, password);
       if (data && data.access_token) {
         const token = data.access_token;
-        localStorage.setItem('access_token', token);
+        localStorage.setItem("access_token", token);
 
         try {
           const resp = await fetch(`${MODE.DEV + API_MAIN_ENDPOINT.AUTH}/me`, {
@@ -38,7 +37,7 @@ export default function LoginPage() {
           });
 
           if (!resp.ok) {
-            toast.error('Não foi possível validar o estado da conta');
+            toast.error("Não foi possível validar o estado da conta");
             return;
           }
 
@@ -49,14 +48,14 @@ export default function LoginPage() {
             setIsPopupSendEmail(true);
           }
         } catch (err2) {
-          toast.error('Erro ao validar a conta');
+          toast.error("Erro ao validar a conta");
           console.error(err2);
         }
       } else {
-        toast.error('Resposta inesperada do servidor');
+        toast.error("Resposta inesperada do servidor");
       }
     } catch (err) {
-      toast.error('Email ou senha incorretos');
+      toast.error("Email ou senha incorretos");
       console.error(err);
     }
   };
@@ -65,36 +64,36 @@ export default function LoginPage() {
   const [isPopupConfirmCode, setIsPopupConfirmCode] = useState(false);
 
   const handleSendEmail = async () => {
-  setIsPopupSendEmail(false);
+    setIsPopupSendEmail(false);
 
-  try {
-    const token = localStorage.getItem("access_token");
+    try {
+      const token = localStorage.getItem("access_token");
 
-    const resp = await fetch(
-      `${MODE.DEV + API_MAIN_ENDPOINT.AUTH}/send-verification-code`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        
-        body: null,
+      const resp = await fetch(
+        `${MODE.DEV + API_MAIN_ENDPOINT.AUTH}/send-verification-code`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+
+          body: null,
+        }
+      );
+
+      if (!resp.ok) {
+        toast.error("Falha ao enviar o email de verificação");
+        return;
       }
-    );
 
-    if (!resp.ok) {
-      toast.error("Falha ao enviar o email de verificação");
-      return;
+      toast.success("Código de verificação enviado! Verifique seu e-mail.");
+      setIsPopupConfirmCode(true);
+    } catch (err) {
+      console.error(err);
+      toast.error("Erro ao enviar o email de verificação");
     }
-
-    toast.success("Código de verificação enviado! Verifique seu e-mail.");
-    setIsPopupConfirmCode(true);
-  } catch (err) {
-    console.error(err);
-    toast.error("Erro ao enviar o email de verificação");
-  }
-};
+  };
 
   const [verificationCode, setVerificationCode] = useState("");
 
@@ -143,8 +142,8 @@ export default function LoginPage() {
       >
         <h1>Verifique seu email</h1>
         <p>
-          Clique no botão abaixo e realize a confirmação da sua conta através do link ou código enviado para o seu
-          email institucional.
+          Clique no botão abaixo e realize a confirmação da sua conta através do
+          link ou código enviado para o seu email institucional.
         </p>
         <Button onClick={handleSendEmail}>Enviar código</Button>
       </Popup>
@@ -201,7 +200,9 @@ export default function LoginPage() {
               Inicie seus primeiros passos para começar a utilizar a plataforma
             </span>
           </div>
-          <Button variant="outlineBlue" onClick={() => navigate(ROUTES.SIGNUP)}>Fazer Cadastro</Button>
+          <Button variant="outlineBlue" onClick={() => navigate(ROUTES.SIGNUP)}>
+            Fazer Cadastro
+          </Button>
         </div>
       </CardContainer>
     </Container>

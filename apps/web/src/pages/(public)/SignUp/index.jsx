@@ -7,11 +7,10 @@ import { ROUTES } from "../../../utils/constants";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
-import { register_user } from "../../../services/user.service.js";
 import Popup from "../../../components/PopUp/index.jsx";
 import { useNavigate } from "react-router-dom";
 
-import { base64Encode } from "@aquitemfcte/core";
+import { base64Encode, register_user } from "@aquitemfcte/core";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -64,6 +63,9 @@ export default function SignUp() {
       return;
     } else if (!senha.match(/[a-z]/)) {
       toast.error("A senha deve conter pelo menos uma letra minúscula.");
+      return;
+    } else if (!senha.match(/[0-9]/)) {
+      toast.error("A senha deve conter pelo menos um número.");
       return;
     } else if (profileImage.size > 5 * 1024 * 1024) {
       toast.error("A imagem de perfil deve ter no máximo 5MB.");
