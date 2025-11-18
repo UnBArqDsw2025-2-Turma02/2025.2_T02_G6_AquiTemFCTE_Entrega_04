@@ -25,3 +25,23 @@ export async function register_user(userData) {
     throw error;
   }
 }
+
+// Função para realizar login — envia credenciais como form-urlencoded (compatível com OAuth2PasswordRequestForm)
+export async function login_user(email, password) {
+  try {
+    const params = new URLSearchParams();
+    params.append('username', email);
+    params.append('password', password);
+
+    const response = await axios.post(`${baseURL}/login`, params, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao realizar login:', error);
+    throw error;
+  }
+}
