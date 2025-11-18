@@ -96,6 +96,44 @@ export default function LoginPage() {
   }
 };
 
+  const [verificationCode, setVerificationCode] = useState("");
+
+  const handleConfirmCode = async () => {
+    if (!verificationCode) {
+      toast.error("Insira o código de verificação");
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("access_token");
+
+      const resp = await fetch(
+        `${MODE.DEV + API_MAIN_ENDPOINT.AUTH}/verify-account`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify({ code: verificationCode }),
+        }
+      );
+
+      if (!resp.ok) {
+        const errorBody = await resp.json().catch(() => null);
+        toast.error(errorBody?.detail || "Código inválido ou expirado");
+        return;
+      }
+
+      toast.success("Conta verificada com sucesso!");
+      setIsPopupConfirmCode(false);
+      navigate(ROUTES.HOME);
+    } catch (err) {
+      console.error(err);
+      toast.error("Erro ao confirmar o código");
+    }
+  };
+
   return (
     <Container>
       <Popup
@@ -105,10 +143,10 @@ export default function LoginPage() {
       >
         <h1>Verifique seu email</h1>
         <p>
-          Clique no botão abaixo e realize a confirmação da sua conta através do link enviado para o seu
+          Clique no botão abaixo e realize a confirmação da sua conta através do link ou código enviado para o seu
           email institucional.
         </p>
-        <Button onClick={handleSendEmail}>Enviar</Button>
+        <Button onClick={handleSendEmail}>Enviar código</Button>
       </Popup>
       <Popup
         isOpen={isPopupConfirmCode}
@@ -117,10 +155,19 @@ export default function LoginPage() {
       >
         <h1>Insira o código</h1>
         <p>
-          Clique no botão abaixo e realize a confirmação da sua conta através do link enviado para o seu
-          email institucional.
+          Insira o código de verificação enviado para seu email institucional.
         </p>
-        <Button onClick={() => setIsPopupConfirmCode(false)}>Enviar</Button>
+        <Input
+          placeholder="Código de verificação"
+          value={verificationCode}
+          onChange={(e) => setVerificationCode(e.target.value)}
+        />
+        <div style={{ display: "flex", gap: 8 }}>
+          <Button onClick={handleConfirmCode}>Confirmar</Button>
+          <Button variant="outlineBlue" onClick={handleSendEmail}>
+            Reenviar código
+          </Button>
+        </div>
       </Popup>
       <CardContainer>
         <div className="form-side">
