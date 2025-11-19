@@ -1,79 +1,28 @@
 # API AquiTemFCTE
 
-## Configurando o ambiente
+Esta é a API do projeto AquiTemFCTE, construída com FastAPI e PostgreSQL.
 
-### 1. Instalar pipx
+## Documentação
 
-```bash
-pip install pipx
-pipx ensurepath
-```
+Para instruções detalhadas de instalação e execução, consulte o [README principal do projeto](../README.md).
 
-> Feche e abra o terminal novamente para que as mudanças tenham efeito.
+## Endpoints Principais
 
-### 2. Instalar e configurar o Poetry
+- **Documentação da API (Swagger)**: `http://localhost:8000/docs`
+- **Documentação Redoc**: `http://localhost:8000/redoc`
 
-```bash
-pipx install poetry
+## Módulos
 
-# Adicionar plugin do shell
-pipx inject poetry poetry-plugin-shell
-```
+- **auth**: Sistema de autenticação e registro de usuários
+- **core**: Configurações principais (banco de dados, autenticação)
+- **common**: Utilitários, validadores e tratamento de erros
+- **services**: Integração com serviços externos (Redis, Storage)
 
-### 3. Configurar Python 3.13
+## Tecnologias
 
-```bash
-# Definir Python 3.13 como versão do projeto
-poetry env use python3.13
-```
-
-### 4. Instalar dependências
-
-```bash
-poetry install
-```
-
-### 5. Configurar variáveis de ambiente
-
-Crie um arquivo `.env` na raiz do projeto as variáveis corretas e no padrão do arquivo `.env.example`
-
-### 6. Iniciar a aplicação com Docker
-
-```bash
-docker-compose up --build
-```
-
-### 7. Executar migrações do banco de dados
-
-> Verifique se o banco de dados está rodando
-
-```bash
-# Criar uma nova migração (se necessário)
-poetry run alembic revision --autogenerate -m "Migration description"
-
-# Aplicar migrações
-poetry run alembic upgrade head
-```
-
-A API estará disponível em `http://localhost:8000`
-
-A documentação da API estará disponível em `http://localhost:8000/docs`
-
-## Testando a aplicação
-
-### Interface de teste (HTML)
-
-Para testar o sistema de verificação de email e todas as funcionalidades implementadas:
-
-1. **No VS Code**, instale a extensão **Live Server**:
-   - Abra a aba de extensões (Ctrl+Shift+X)
-   - Pesquise por "Live Server"
-   - Instale a extensão do autor **Ritwick Dey**
-
-2. Abra o arquivo `test-register.html` na raiz do projeto
-
-3. Clique com o botão direito no arquivo e selecione **"Open with Live Server"**
-
-4. O navegador abrirá automaticamente com a interface de teste
-
-5. Siga o fluxo de teste
+- **FastAPI**: Framework web moderno para Python
+- **PostgreSQL**: Banco de dados relacional
+- **SQLAlchemy**: ORM para Python
+- **Alembic**: Gerenciamento de migrações
+- **Redis**: Cache e sessions
+- **Pydantic**: Validação de dados

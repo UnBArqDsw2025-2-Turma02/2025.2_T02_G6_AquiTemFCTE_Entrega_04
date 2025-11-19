@@ -17,8 +17,7 @@ async def send_verification_email(email: str, verification_code: str) -> bool:
     settings = Settings()
     try:
         msg = MIMEMultipart('alternative')
-        msg['Subject'] = 'Código de Verificação AquiTemFCTE: '
-        '{verification_code}'
+        msg['Subject'] = f"Código de Verificação AquiTemFCTE: {verification_code}"
         msg['From'] = f'{settings.SMTP_FROM_NAME} <{settings.SMTP_FROM_EMAIL}>'
         msg['To'] = email
 
@@ -33,5 +32,7 @@ async def send_verification_email(email: str, verification_code: str) -> bool:
 
         return True
 
-    except Exception:
+    except Exception as e:
+        # Log exception to server logs to help debugging SMTP issues
+        print(f"Error sending verification email to {email}: {e}")
         return False

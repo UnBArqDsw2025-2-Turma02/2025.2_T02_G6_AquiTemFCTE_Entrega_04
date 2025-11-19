@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@aquitemfcte/utils/*": ["src/utils/*"],
+      "@aquitemfcte/services/*": ["src/services/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}

@@ -34,38 +34,186 @@ Pronto! Agora o seu ambiente está configurado para dar início às contribuiç�
 
 ## 🚀 Executando o Projeto
 
-Este projeto utiliza uma estrutura monorepo com [Turborepo](https://turbo.build/). A documentação é gerada usando o [Docsify](https://docsify.js.org/), a interface é baseada em [ReactJs]() e o backend contruído com <EM BREVE>.
+Este projeto utiliza uma estrutura monorepo com [Turborepo](https://turbo.build/). A documentação é gerada usando o [Docsify](https://docsify.js.org/), a interface é baseada em [React.js](https://react.dev/) com [Vite](https://vitejs.dev/) e o backend construído com [FastAPI](https://fastapi.tiangolo.com/) e [PostgreSQL](https://www.postgresql.org/).
 
-Os comandos disponíveis para executar todo o ambiente pode ser visto abaixo:
+### Pré-requisitos
 
-- **`npm run dev`**: Inicia o servidor de desenvolvimento da documentação, interface e backend.
-- **`npm run build`**: Realiza o build do ambiente da interface e backend.
+Antes de executar o projeto, certifique-se de ter instalado:
+
+- **Node.js** (versão 18 ou superior)
+- **npm** (geralmente vem com o Node.js)
+- **Python 3.13**
+- **Docker** e **Docker Compose**
+
+### Passo 1: Configurar o Backend (API)
+
+#### 1.1. Instalar pipx
+
+```bash
+pip install pipx
+pipx ensurepath
+```
+
+> **Importante:** Feche e abra o terminal novamente para que as mudanças tenham efeito.
+
+#### 1.2. Instalar e configurar o Poetry
+
+```bash
+pipx install poetry
+
+# Adicionar plugin do shell
+pipx inject poetry poetry-plugin-shell
+```
+
+#### 1.3. Configurar Python 3.13 ou 3.12
+
+```bash
+# Definir Python 3.13 como versão do projeto
+poetry env use python3.13
+```
+
+Ou utilize este comando para a versão 3.12:
+
+```bash
+# Definir Python 3.13 como versão do projeto
+poetry env use python3.12
+```
+
+#### 1.4. Instalar dependências Python
+
+```bash
+poetry install
+```
+
+#### 1.5. Configurar variáveis de ambiente
+
+Crie um arquivo `.env` na raiz do projeto seguindo o padrão do arquivo `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+#### 1.6. Subir os serviços do banco de dados
+
+```bash
+docker-compose up -d
+```
+
+Este comando irá subir:
+
+- **PostgreSQL** na porta `5432`
+- **Redis** na porta `6379`
+
+#### 1.7. Executar migrações do banco de dados
+
+```bash
+# Aplicar migrações
+poetry run alembic upgrade head
+
+# Caso precise criar uma nova migração:
+poetry run alembic revision --autogenerate -m "Migration description"
+```
+
+### Passo 2: Executar o Ambiente de Desenvolvimento
+
+Com o backend configurado, agora execute todo o ambiente (frontend + documentação + API):
+
+```bash
+npm run dev
+```
+
+Este comando irá iniciar simultaneamente:
+
+- **API FastAPI** em `http://localhost:8000`
+- **Frontend React** em `http://localhost:5173`
+- **Documentação Docsify** em `http://localhost:3000`
+
+### URLs de Acesso
+
+- **Frontend (React)**: `http://localhost:5173`
+- **Documentação**: `http://localhost:3000`
+- **API**: `http://localhost:8000`
+- **Documentação da API (Swagger)**: `http://localhost:8000/docs`
+
+### Comandos Disponíveis
+
+- **`npm run dev`**: Inicia todos os serviços de desenvolvimento
+- **`npm run build`**: Realiza o build de todos os projetos
+- **`npm run lint`**: Executa a verificação de lint em todos os projetos
+- **`npm run format`**: Formata o código usando Prettier
+- **`npm run check-types`**: Verifica os tipos TypeScript
 
 ### Estrutura do Projeto
 
 ```
+├── api/                    # Backend FastAPI
+│   ├── common/            # Utilitários e validadores comuns
+│   ├── core/              # Configurações principais (auth, db)
+│   ├── modules/           # Módulos da aplicação
+│   │   └── auth/         # Módulo de autenticação
+│   ├── services/          # Serviços externos (Redis, Storage)
+│   └── main.py           # Arquivo principal da API
 ├── apps/
-│   └── docs/           # Documentação do projeto (Docsify)
-├── packages/           # Pacotes compartilhados
-│   ├── ui/            # Componentes de interface
-│   ├── eslint-config/ # Configurações do ESLint
+│   ├── docs/             # Documentação do projeto (Docsify)
+│   └── web/              # Frontend React + Vite
+│       ├── src/
+│       │   ├── components/   # Componentes reutilizáveis
+│       │   ├── pages/       # Páginas da aplicação
+│       │   ├── services/    # Serviços para API
+│       │   └── utils/       # Utilitários
+│       └── package.json
+├── packages/              # Pacotes compartilhados
+│   ├── ui/               # Componentes de interface
+│   ├── eslint-config/    # Configurações do ESLint
 │   └── typescript-config/ # Configurações do TypeScript
-└── turbo.json         # Configuração do Turborepo
+├── migrations/           # Migrações do banco (Alembic)
+├── docker-compose.yaml   # Configuração do Docker
+├── pyproject.toml       # Configurações Python/Poetry
+└── turbo.json           # Configuração do Turborepo
 ```
 
 ### Deploy Automático
 
 O projeto possui um workflow automatizado no GitHub Actions que:
+
 - Testa a build em Pull Requests
 - Faz deploy automático para GitHub Pages quando há merge na branch `main`
 - A documentação fica disponível em: `https://unbarqdsw2025-2-turma02.github.io/2025.2_T02_G6_AquiTemFCTE_Entrega_04/`
 
 ## 🧪 Construído com:
 
+### Frontend
+
+- [React](https://react.dev/) - Biblioteca para construção de interfaces de usuário
+- [Vite](https://vitejs.dev/) - Build tool e servidor de desenvolvimento
+- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS utility-first
+- [React Router](https://reactrouter.com/) - Roteamento para aplicações React
+- [React Icons](https://react-icons.github.io/react-icons/) - Biblioteca de ícones
+- [React Toastify](https://fkhadra.github.io/react-toastify/) - Notificações toast
+
+### Backend
+
+- [FastAPI](https://fastapi.tiangolo.com/) - Framework web moderno e rápido para Python
+- [PostgreSQL](https://www.postgresql.org/) - Banco de dados relacional
+- [Redis](https://redis.io/) - Banco de dados em memória para cache
+- [SQLAlchemy](https://www.sqlalchemy.org/) - ORM para Python
+- [Alembic](https://alembic.sqlalchemy.org/) - Gerenciamento de migrações de banco
+- [Pydantic](https://pydantic-docs.helpmanual.io/) - Validação de dados
+- [Poetry](https://python-poetry.org/) - Gerenciamento de dependências Python
+
+### Infraestrutura e Ferramentas
+
 - [Turborepo](https://turbo.build/) - Utilizado para gerenciamento do monorepo
+- [Docker](https://www.docker.com/) - Containerização dos serviços
 - [Docsify](https://docsify.js.org/) - Utilizado para a documentação do projeto
 - [GitHub Actions](https://docs.github.com/en/actions) - Utilizado para CI/CD e deploy automático
 - [GitHub Pages](https://pages.github.com/) - Utilizado para hospedagem da documentação
+- [ESLint](https://eslint.org/) - Linting para JavaScript/TypeScript
+- [Prettier](https://prettier.io/) - Formatação de código
+- [TypeScript](https://www.typescriptlang.org/) - Superset tipado do JavaScript
+
+### Padrões e Convenções
+
 - [Contributor Covenant](https://www.contributor-covenant.org/) - Utilizado para o [Código de Conduta](./CODE_OF_CONDUCT.md)
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) - Utilizado como Padrão de Commits no [Guia de Contribuição](./CONTRIBUTING.md)
 - [GitHub Flow](https://docs.github.com/pt/get-started/using-github/github-flow) - Utilizado como Política de Branchs no [Guia de Contribuição](./CONTRIBUTING.md)
