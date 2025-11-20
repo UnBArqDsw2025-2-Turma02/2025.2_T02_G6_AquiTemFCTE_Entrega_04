@@ -5,6 +5,7 @@ export const Container = styled.header`
   display: flex;
   flex-direction: column;
   position: fixed;
+  z-index: 1000;
 `;
 
 export const Lettering = styled.div`
@@ -53,6 +54,7 @@ export const NavLinks = styled.nav`
   .logo {
     height: 40px;
     width: auto;
+    cursor: pointer;
   }
 
   .links {

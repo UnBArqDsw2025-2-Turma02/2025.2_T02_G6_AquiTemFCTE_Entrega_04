@@ -37,6 +37,10 @@ html {
     line-height: var(--font-lineheight-low);
 }
 
+p {
+    margin: 0;
+}
+
 h1 {
     font-size: var(--fs-scale-up-04);
     margin: 0;

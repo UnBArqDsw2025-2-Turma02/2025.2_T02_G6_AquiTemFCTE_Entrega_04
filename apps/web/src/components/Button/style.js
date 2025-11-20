@@ -17,6 +17,16 @@ const buttonVariants = {
       background: var(--primary-color);
       color: var(--white);
     }
+  `,
+  outlineGray: css`
+    background: var(--white);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    &:hover {
+      background: var(--gray);
+      color: var(--primary-color-dark);
+      border: 2px solid var(--primary-color-dark);
+    }
   `
 };
 

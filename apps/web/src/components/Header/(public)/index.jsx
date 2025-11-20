@@ -1,19 +1,16 @@
 import { Container, Lettering, NavLinks } from "./style";
-import AquiTemFCTELogo from "../../assets/AquiTemFCTELogo.svg";
-import Button from "../Button";
+import AquiTemFCTELogo from "../../../assets/AquiTemFCTELogo.svg";
+import Button from "../../Button";
 import { useState, useEffect } from "react";
+import { ROUTES } from "../../../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 import { RxAccessibility, RxHamburgerMenu } from "react-icons/rx";
 import { FaRegMoon } from "react-icons/fa";
-import {
-  IoChatbubbleOutline,
-  IoStarOutline,
-  IoPersonOutline,
-  IoSearchOutline,
-} from "react-icons/io5";
-
 
 export default function Header() {
+  const navigate = useNavigate();
+
   const chamadas = [
     "O primeiro site de venda e troca da FCTE para a FCTE!",
     "Procurando algo no precinho? AquiTem!",
@@ -33,7 +30,6 @@ export default function Header() {
         setChamadaAtual((prev) => (prev + 1) % chamadas.length);
         setIsVisible(true);
       }, 300);
-      
     }, 10000);
 
     return () => clearInterval(interval);
@@ -58,19 +54,19 @@ export default function Header() {
         </div>
       </Lettering>
       <NavLinks>
-        <img src={AquiTemFCTELogo} alt="Aqui Tem FCTE Logo" className="logo" />
+        <img
+          src={AquiTemFCTELogo}
+          alt="Aqui Tem FCTE Logo"
+          className="logo"
+          onClick={() => navigate(ROUTES.HOME)}
+        />
         <div className="links big-monitor">
-          <a href="#home">Eletrônicos</a>
-          <a href="#about">Livros</a>
-          <a href="#contact">Roupas</a>
-          <a href="#contact">Outros</a>
+          <a onClick={() => navigate(ROUTES.HOME)}>Início</a>
+          <a href="#about">Sobre</a>
+          <a href="#contact">FAQ</a>
         </div>
         <div className="buttons big-monitor">
-          <IoSearchOutline className="react-icon search" />
-          <IoChatbubbleOutline className="react-icon chat" />
-          <IoStarOutline className="react-icon star" />
-          <IoPersonOutline className="react-icon user" />
-          <Button>Quero Anunciar!</Button>
+          <Button onClick={() => navigate(ROUTES.LOGIN)}>Entrar / Cadastrar</Button>
         </div>
 
         <div className="hamburger-menu small-monitor">
