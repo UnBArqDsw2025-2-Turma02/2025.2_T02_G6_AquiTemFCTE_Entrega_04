@@ -6,7 +6,13 @@ const buttonVariants = {
     color: var(--white);
     &:hover {
       background: var(--secondary-color-dark);
-      color: var(--white);
+    }
+  `,
+  blue: css`
+    background: var(--primary-color);
+    color: var(--white);
+    &:hover {
+      background: var(--primary-color-dark);
     }
   `,
   outlineBlue: css`
@@ -27,7 +33,7 @@ const buttonVariants = {
       color: var(--primary-color-dark);
       border: 2px solid var(--primary-color-dark);
     }
-  `
+  `,
 };
 
 export const Container = styled.button`

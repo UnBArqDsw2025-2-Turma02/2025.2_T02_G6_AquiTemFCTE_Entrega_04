@@ -4,6 +4,10 @@ export const ROUTES = {
   SIGNUP: '/signup',
   ABOUT: '/about',
   CONTACT: '/contact',
+
+  AUTHENTICATED: {
+    HOME: '/'
+  }
 };
 
 export const MODE = {
