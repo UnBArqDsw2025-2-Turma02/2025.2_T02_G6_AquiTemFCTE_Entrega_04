@@ -1,6 +1,6 @@
 # 2025.2 - AquiTemFCTE
 
-![Capa AquiTemFCTE](./docs/assets/AquiTemFCTE.png)
+![Capa AquiTemFCTE](./assets/AquiTemFCTE.png)
 
 <div align="center">
 
