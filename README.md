@@ -96,7 +96,7 @@ cp .env.example .env
 #### 1.6. Subir os serviços do banco de dados
 
 ```bash
-docker-compose up -d
+docker-compose up --build
 ```
 
 Este comando irá subir:
